@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>seven-system-parent</artifactId>
+        <groupId>com.zhujuming.vip</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>seven-system-webapp</artifactId>
+    <name>seven-system-webapp</name>
+    <packaging>war</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.zhujuming.vip</groupId>
+            <artifactId>seven-system-contract</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!--swagger start-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger-ui.version}</version>
+        </dependency>
+        <!--优秀的图片处理的Google开源Java类库-->
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>0.4.8</version>
+        </dependency>
+        <!--feign start-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <!--spring boot 2.0.3版本解决方案：spring-cloud-starter-feign-->
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+        </dependency>
+        <!--整合oauth2-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+        <!-- feign整合OkHttp -->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-okhttp</artifactId>
+        </dependency>
+        <!--分布式链路追踪三个依赖-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zipkin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <!--打包的时候可以不用包进去，别的设施会提供。事实上该依赖理论上可以参与编译，测试，运行等周期。相当于compile，但是打包阶段做了exclude操作-->
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <!--打war的时候放开此注释,屏蔽下面的build,以及上面的<package>标签-->
+    <build>
+                <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <!--如果要访问info接口想获取maven中的属性内容请记得添加如下内容-->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <!-- 指定maven编译的jdk版本,如果不指定,maven3默认用jdk 1.5 maven2默认用jdk1.3 -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <!-- 一般而言，target与source是保持一致的，但是，有时候为了让程序能在其他版本的jdk中运行(对于低版本目标jdk，源代码中不能使用低版本jdk中不支持的语法)，会存在target不同于source的情况 -->
+                    <source>1.8</source> <!-- 源代码使用的JDK版本 -->
+                    <target>1.8</target> <!-- 需要生成的目标class文件的编译版本 -->
+                    <encoding>UTF-8</encoding><!-- 字符集编码 -->
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+    </build>
+
+    <!--        <build>-->
+    <!--            <finalName>${project.artifactId}</finalName>-->
+    <!--            <plugins>-->
+    <!--                <plugin>-->
+    <!--                    <groupId>org.springframework.boot</groupId>-->
+    <!--                    <artifactId>spring-boot-maven-plugin</artifactId>-->
+    <!--                    &lt;!&ndash;如果要访问info接口想获取maven中的属性内容请记得添加如下内容&ndash;&gt;-->
+    <!--                    <executions>-->
+    <!--                        <execution>-->
+    <!--                            <goals>-->
+    <!--                                <goal>build-info</goal>-->
+    <!--                            </goals>-->
+    <!--                        </execution>-->
+    <!--                    </executions>-->
+    <!--                    &lt;!&ndash; 构建不包含lib的jar包&ndash;&gt;-->
+    <!--                    <configuration>-->
+    <!--                        <layout>ZIP</layout>-->
+    <!--                        <includes>-->
+    <!--                            <include>-->
+    <!--                                <groupId>non-exists</groupId>-->
+    <!--                                <artifactId>non-exists</artifactId>-->
+    <!--                            </include>-->
+    <!--                        </includes>-->
+    <!--                    </configuration>-->
+    <!--                </plugin>-->
+    <!--                <plugin>-->
+    <!--                    &lt;!&ndash; 指定maven编译的jdk版本,如果不指定,maven3默认用jdk 1.5 maven2默认用jdk1.3 &ndash;&gt;-->
+    <!--                    <groupId>org.apache.maven.plugins</groupId>-->
+    <!--                    <artifactId>maven-compiler-plugin</artifactId>-->
+    <!--                    <version>3.1</version>-->
+    <!--                    <configuration>-->
+    <!--                        &lt;!&ndash; 一般而言，target与source是保持一致的，但是，有时候为了让程序能在其他版本的jdk中运行(对于低版本目标jdk，源代码中不能使用低版本jdk中不支持的语法)，会存在target不同于source的情况 &ndash;&gt;-->
+    <!--                        <source>1.8</source> &lt;!&ndash; 源代码使用的JDK版本 &ndash;&gt;-->
+    <!--                        <target>1.8</target> &lt;!&ndash; 需要生成的目标class文件的编译版本 &ndash;&gt;-->
+    <!--                        <encoding>UTF-8</encoding>&lt;!&ndash; 字符集编码 &ndash;&gt;-->
+    <!--                    </configuration>-->
+    <!--                </plugin>-->
+    <!--                <plugin>-->
+    <!--                    <groupId>org.sonarsource.scanner.maven</groupId>-->
+    <!--                    <artifactId>sonar-maven-plugin</artifactId>-->
+    <!--                    <version>3.5.0.1254</version>-->
+    <!--                </plugin>-->
+
+    <!--                &lt;!&ndash; 打包跳过TEST &ndash;&gt;-->
+    <!--                <plugin>-->
+    <!--                    <groupId>org.apache.maven.plugins</groupId>-->
+    <!--                    <artifactId>maven-surefire-plugin</artifactId>-->
+    <!--                    <version>2.18.1</version>-->
+    <!--                    <configuration>-->
+    <!--                        &lt;!&ndash;true跳过测试 &ndash;&gt;-->
+    <!--                        <skipTests>true</skipTests>-->
+    <!--                    </configuration>-->
+    <!--                </plugin>-->
+
+    <!--                &lt;!&ndash; 打jar包不包含yml文件 &ndash;&gt;-->
+    <!--                <plugin>-->
+    <!--                    <groupId>org.apache.maven.plugins</groupId>-->
+    <!--                    <artifactId>maven-jar-plugin</artifactId>-->
+    <!--                    <configuration>-->
+    <!--                        &lt;!&ndash; 排除配置文件 &ndash;&gt;-->
+    <!--                        <excludes>-->
+    <!--                            <exclude>*.yml</exclude>-->
+    <!--                            <exclude>*.xml</exclude>-->
+    <!--                        </excludes>-->
+    <!--                    </configuration>-->
+    <!--                </plugin>-->
+
+    <!--                &lt;!&ndash; 配置文件打包到conf目录下 &ndash;&gt;-->
+    <!--                <plugin>-->
+    <!--                    <artifactId>maven-resources-plugin</artifactId>-->
+    <!--                    <executions>-->
+    <!--                        <execution>-->
+    <!--                            <id>copy-sources</id>-->
+    <!--                            <phase>process-sources</phase>-->
+    <!--                            <goals>-->
+    <!--                                <goal>copy-resources</goal>-->
+    <!--                            </goals>-->
+    <!--                            <configuration>-->
+    <!--                                <outputDirectory>${project.build.directory}/conf</outputDirectory>-->
+    <!--                                <resources>-->
+    <!--                                    <resource>-->
+    <!--                                        <directory>src/main/resources</directory>-->
+    <!--                                        <includes>-->
+    <!--                                            <include>*.yml</include>-->
+    <!--                                            <include>*.xml</include>-->
+    <!--                                        </includes>-->
+    <!--                                    </resource>-->
+    <!--                                </resources>-->
+    <!--                            </configuration>-->
+    <!--                        </execution>-->
+    <!--                    </executions>-->
+    <!--                </plugin>-->
+
+    <!--                &lt;!&ndash; 依赖包到lib目录下 &ndash;&gt;-->
+    <!--                <plugin>-->
+    <!--                    <groupId>org.apache.maven.plugins</groupId>-->
+    <!--                    <artifactId>maven-dependency-plugin</artifactId>-->
+    <!--                    <executions>-->
+    <!--                        <execution>-->
+    <!--                            <id>copy-dependencies</id>-->
+    <!--                            <phase>package</phase>-->
+    <!--                            <goals>-->
+    <!--                                <goal>copy-dependencies</goal>-->
+    <!--                            </goals>-->
+    <!--                            <configuration>-->
+    <!--                                <outputDirectory>${project.build.directory}/lib</outputDirectory>-->
+    <!--                                <useBaseVersion>true</useBaseVersion>-->
+    <!--                            </configuration>-->
+    <!--                        </execution>-->
+    <!--                    </executions>-->
+    <!--                </plugin>-->
+    <!--            </plugins>-->
+    <!--            <resources>-->
+    <!--                <resource>-->
+    <!--                    <directory>src/main/resources</directory>-->
+    <!--                    <includes>-->
+    <!--                        <include>**/*</include>-->
+    <!--                    </includes>-->
+    <!--                    <filtering>false</filtering>-->
+    <!--                </resource>-->
+    <!--            </resources>-->
+    <!--        </build>-->
+</project>

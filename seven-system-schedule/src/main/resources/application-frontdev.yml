@@ -1,0 +1,14 @@
+# 高可用节点1的配置
+server:
+  port: 9001
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: # http://10.125.42.57:8772/eureka/
+logging:
+  config: classpath:logback-frontdev.xml
