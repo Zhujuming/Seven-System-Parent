@@ -1,0 +1,15 @@
+com\zhujuming\vip\webapp\handler\CustomAccessDeniedHandler.class
+com\zhujuming\vip\webapp\filter\AuthenticationFilter.class
+com\zhujuming\vip\webapp\utils\JwtTokenBuilder.class
+com\zhujuming\vip\webapp\config\HystrixConfig.class
+com\zhujuming\vip\webapp\controller\auth\AuthController.class
+com\zhujuming\vip\webapp\controller\TokenBuilder.class
+com\zhujuming\vip\webapp\aop\WebLogAspect.class
+com\zhujuming\vip\webapp\config\OkHttp3LoggingInterceptor.class
+com\zhujuming\vip\webapp\config\SwaggerConfig.class
+com\zhujuming\vip\webapp\handler\GrantedAuthorityImpl.class
+com\zhujuming\vip\webapp\config\WebMVCConfig.class
+com\zhujuming\vip\webapp\handler\Http401AuthenticationEntryPoint.class
+com\zhujuming\vip\webapp\WebappApplication.class
+com\zhujuming\vip\webapp\config\FeignOkHttpConfig.class
+com\zhujuming\vip\webapp\config\WebSecurityConfig.class

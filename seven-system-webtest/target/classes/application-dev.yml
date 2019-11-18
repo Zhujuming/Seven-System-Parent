@@ -1,0 +1,26 @@
+#是否显示swagger-ui
+swagger.show: true
+
+#服务注册与发现相关配置
+eureka:
+  #自定义实例编号
+  instance:
+    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port}
+    #优先使用IP地址方式进行注册服务
+    prefer-ip-address: true
+    #配置使用指定IP
+    ip-address: 127.0.0.1
+  client:
+    #服务注册地址
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/
+
+logging:
+  config: classpath:logback-dev.xml
+
+expense:
+  auth:
+    gate:
+      staffId:  19183 #58566 19183  8827 62825
+      staffName:  richardpu #andyjhxia richardpu vivianshi keliye
+      token: 92a2be0de42f4a62a310e72cfec62ae2

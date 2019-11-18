@@ -1,0 +1,5 @@
+com\zhujuming\vip\contract\consumer\auth\AuthConsumer.class
+com\zhujuming\vip\contract\config\NotBreakerConfiguration.class
+com\zhujuming\vip\contract\hystrix\auth\AuthHystrix$1.class
+com\zhujuming\vip\contract\config\NotBreakerConfiguration$UserErrorDecoder.class
+com\zhujuming\vip\contract\hystrix\auth\AuthHystrix.class

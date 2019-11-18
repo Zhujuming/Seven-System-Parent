@@ -16,7 +16,7 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-    @PostMapping("/getStaffInfo")
+    @PostMapping("/getUserInfo")
     public ResponseVO getUserInfo(@RequestBody long userId) {
         if (userId == 0) {
             return new ResponseVO<>(ResponseCode.PARAM_INVALID);

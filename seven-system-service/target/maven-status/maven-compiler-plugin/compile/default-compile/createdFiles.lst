@@ -1,0 +1,5 @@
+com\zhujuming\vip\service\controller\auth\AuthController.class
+com\zhujuming\vip\service\service\AuthService.class
+com\zhujuming\vip\service\service\impl\AuthServiceImpl.class
+com\zhujuming\vip\service\mapper\TUsersRepository.class
+com\zhujuming\vip\service\ServerApplication.class

@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: seven-system-eureka
+  profiles:
+    active: dev

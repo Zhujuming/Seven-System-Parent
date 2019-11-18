@@ -1,0 +1,68 @@
+server:
+  port: 8001
+  servlet:
+    context-path: /webtest/api
+
+spring:
+  jmx:
+    default-domain: proj02
+  profiles:
+    active: dev
+  application:
+    name: service-feign-web
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0 # 将采样比例设置为 1.0，也就是全部都需要。默认是 0.1
+  zipkin:
+    base-url: http://localhost:9411/  #指定了 Zipkin 服务器的地址
+    enabled: true
+    sender:
+      type: web
+
+feign:
+  hystrix:
+    enabled: true #开启熔断器   true
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+
+#hystrix禁止服务超时时间
+#hystrix.command.default.execution.timeout.enabled=false
+#hystrix设置服务超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 100000
+
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+
+#配置actuator的相关配置
+# 描述信息
+info:
+  blog-url: http://blog.battcn.com
+  author: dragon
+
+# 加载所有的端点/默认只加载了 info / health
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: false # 可以关闭制定的端点
+
+# 路径映射，将 health 路径映射成 rest_health 那么在访问 health 路径将为404，因为原路径已经变成 rest_health 了，一般情况下不建议使用
+# management.endpoints.web.path-mapping.health=rest_health
+

@@ -29,7 +29,7 @@ import java.util.Calendar;
 @Api(description = "获取token")
 public class AuthController {
 
-//    @Resource
+//    @Autowired
 //    private AuthConsumer authConsumer;
 
     @Value("${config.get.tokenKey}")

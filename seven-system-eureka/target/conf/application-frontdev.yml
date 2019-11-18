@@ -1,0 +1,15 @@
+# 高可用节点1的配置
+server:
+  port: 8771
+eureka:
+  instance:
+    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port}
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://10.125.42.57:8772/eureka/
+logging:
+  config: classpath:logback-frontdev.xml

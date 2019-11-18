@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    active: dev
+
+# 是否显示swagger-ui
+swagger.show: true
