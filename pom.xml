@@ -27,6 +27,7 @@
         <module>seven-system-webapp</module>
         <module>seven-system-contract</module>
         <module>seven-system-webtest</module>
+        <module>seven-system-acticemq</module>
     </modules>
 
     <properties>

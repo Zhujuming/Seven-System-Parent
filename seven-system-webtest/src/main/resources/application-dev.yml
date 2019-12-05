@@ -18,9 +18,102 @@ eureka:
 logging:
   config: classpath:logback-dev.xml
 
+#zx - s
+common:
+  cost:
+    data:
+      allOrganization: http://test.jarvis-api.oa.com/api/CostV7DataService/1.0/getAllOrgnization?%s&signature=%s
+      allDepartment: http://test.jarvis-api.oa.com/api/CostV7DataService/1.0/getAllDepartment?%s&signature=%s
+      hrCostCenter: http://test.jarvis-api.oa.com/api/CostV7DataService/1.0/getHrCostCenter?%s&signature=%s
+      allProduct: http://test.jarvis-api.oa.com/api/CostV7DataService/1.0/getAllProduct?%s&signature=%s
+      erpProject: http://test.jarvis-api.oa.com/api/CostV7DataService/1.0/getErpProject?%s&signature=%s
+      currencyUrl: http://test.jarvis-api.oa.com/api/CostV7DataService/1.0/getCurrencys?%s&signature=%s
+      costTypeByConditionExt: http://test.jarvis-api.oa.com/api/CostV7DataService/1.0/getCostTypeByConditionExt?%s&signature=%s
+      baseDict: http://test.jarvis-api.oa.com/api/CostV7DataService/1.0/getBaseDict?%s&signature=%s
+      baseRuleDict: http://test.jarvis-api.oa.com/api/CostV7DataService/1.0/getBaseRuleDict?%s&signature=%s
+      costTypeDetail: http://test.jarvis-api.oa.com/api/CostV7DataService/1.0/getCostTypeDetail?%s&signature=%s
+      baseCurrType: http://test.jarvis-api.oa.com/api/CostV7DataService/1.0/getBaseCurrType?%s&signature=%s
+      syncTravelPlanStaff: http://10.123.5.87/Cost/Rest/CostService/Get/SyncTravelPlanStaff/
+      seniorStaff: http://10.123.5.87/Cost/Rest/CostService/Get/GetSeniorStaff/
+      costService: http://10.123.5.87/Cost/Rest/CostService/Json/InvokeCostAPI
+      uploadFileV7: http://test.cost.oa.com/costv5service/opencost/UploadEInvoiceFileV7.aspx?username=%s&clientip=%s&businessType=%s
+      userToggles: 0
+
 expense:
   auth:
     gate:
       staffId:  19183 #58566 19183  8827 62825
       staffName:  richardpu #andyjhxia richardpu vivianshi keliye
       token: 92a2be0de42f4a62a310e72cfec62ae2
+
+#zx - e
+
+cost:
+  service:
+    ipAddress: 10.123.5.87
+    invokeCostAPIUrl: http://${cost.service.ipAddress}/Cost/Rest/CostService/Json/InvokeCostAPI
+
+domestic:
+  incomeValidJumpUrl: https://oa.m.tencent.com/an:MFA/MESEinvoice/
+
+#图片参数
+capacity:
+  wide: 1200
+  pixel: 0.8f
+  memory: 1048576
+
+costConstant:
+  #v7appid
+  costV7ApiId: CostV7
+  costV7BatchId:
+  #获取用户开关
+  userFeatureToggleClassName: FeatureToggleService
+  userFeatureToggleMethodName: GetUserFeatureToggles
+  #保存提交报销申请
+  createExpenseClassName: ExpenseService
+  createExpenseMethodName: CreateExpenseApply
+  #查询报销详情
+  queryExpenseMethodName: GetExpenseApplyById
+  #删除电子发票
+  deleteInvoiceClassName: QueryExpenseApplies
+  deleteInvoiceMethodName: DeleteEInvoice
+  #查询关联的电子发票
+  queryInvoiceClassName: ExpenseService
+  queryInvoiceMethodName: GetExpenseApplyById
+  #查询国外凭证
+  queryVoucherClassName: ExpenseEInvoiceService
+  queryVoucherMethodName: QueryCredential
+  #删除国外凭证
+  expenseEInvoiceService: ExpenseEInvoiceService
+  deleteCredential: DeleteCredential
+  #查询汇率
+  expenseRawClassName: ExpenseService
+  expenseRawMethod: GetCurrencyRates
+  #创建多类型保险单
+  localhost: 127.0.0.1
+  internationalTravelCostEvents: InternationalTravelCostEvents
+  costV7: CostV7
+  pROJECTCODE: 1009630
+  tWO: 2
+  fIVE: 5
+  cOSTTYPEID: 706
+  #汇率转换
+  getCurrencyRates: GetCurrencyRates
+  USD: USD
+  US: US
+  EN: EN
+  ZHS: ZHS
+  #取消报销单
+  claimClassName: ExpenseService
+  ClaimMethodName: CancelExpenseApplies
+  RequisitionAppId: MobileCost
+  RequisitionBatchId:
+  #经费验证
+  RequestValue: {}
+
+  #国内版灰度名单是否开启 true 开启/ false 关闭
+  DomeValue: true
+  #国外版灰度名单是否开启 true 开启/ false关闭
+  OverseaValue: true
+  #国内版灰度名单是否跳入到老版本  true 跳入/ false 不跳入
+  Dome2OldValue: true

@@ -1,0 +1,25 @@
+server:
+  port: 9002 #端口号
+
+logging:
+  config: classpath:logback-dev.xml #日志读取logback-dev.xml 文件
+
+eureka: #服务注册与发现相关配置
+  instance:
+    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port} #自定义实例编号
+    prefer-ip-address: true #优先使用IP地址方式进行注册服务
+    ip-address: 127.0.0.1 #配置使用指定IP
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/ #服务注册地址
+
+spring:
+  activemq:
+    broker-url: tcp://127.0.0.1:61616
+    user: admin
+    password: admin
+    in-memory: true
+    pool:
+      enabled: false
+activemq:
+  queue: zhujuming-queue
